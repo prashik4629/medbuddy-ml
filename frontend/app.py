@@ -7,9 +7,12 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-
-API_URL = os.getenv("API_URL", "http://127.0.0.1:8000/api/v1/predict")
-API_KEY = os.getenv("API_KEY", "medbuddy-dev-key-change-in-production")
+try:
+    API_URL = st.secrets["API_URL"]
+    API_KEY = st.secrets["API_KEY"]
+except:
+    API_URL = os.getenv("API_URL", "http://127.0.0.1:8000/api/v1/predict")
+    API_KEY = os.getenv("API_KEY", "medbuddy-dev-key-change-in-production")
 
 st.set_page_config(
     page_title="MedBuddy.ML",
